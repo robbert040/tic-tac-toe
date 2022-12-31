@@ -51,3 +51,17 @@ export const initialGameState = [
     value: undefined,
   },
 ];
+
+export const checkIfThereIsAWinner = () => {};
+
+export const checkIfTheGameIsFinished = (game: Array<GameStateProps>) => {
+  let emptyValues = 0;
+
+  game.forEach(cell => {
+    if (!cell.value) {
+      emptyValues += 1;
+    }
+  });
+
+  return !!emptyValues;
+};

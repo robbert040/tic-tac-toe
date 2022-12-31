@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList } from 'react-native';
-import { GameStateProps } from '../../utils/game';
+import { checkIfTheGameIsFinished, GameStateProps, initialGameState } from '../../utils/game';
 import GameRenderItem from './GameRenderItem';
 import withPosition from './withContext';
 import styles from './styles';
@@ -15,7 +15,13 @@ const keyExtractor = (item: GameStateProps) => {
 };
 
 function Game() {
-  const { game } = useGame();
+  const { game, setGame } = useGame();
+
+  useEffect(() => {
+    if (checkIfTheGameIsFinished(game)) {
+      setGame(initialGameState);
+    }
+  }, [game, setGame]);
 
   return (
     <FlatList
