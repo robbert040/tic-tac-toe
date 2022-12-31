@@ -3,14 +3,16 @@ import { useContext, useMemo } from 'react';
 import { GameContext } from './context';
 
 const useGame = () => {
-  const { game, setGame } = useContext(GameContext);
+  const { game, setGame, player, setPlayer } = useContext(GameContext);
 
   return useMemo(
     () => ({
       game,
       setGame,
+      player,
+      setPlayer,
     }),
-    [game, setGame]
+    [game, setGame, player, setPlayer]
   );
 };
 

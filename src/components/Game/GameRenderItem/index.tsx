@@ -13,7 +13,7 @@ function GameRenderItem(props: props) {
   const { x, y, value } = item;
 
   const styles = useMemo(() => createStyles({ x, y }), [x, y]);
-  const { setGame, game } = useGame();
+  const { setGame, game, setPlayer, player } = useGame();
 
   const onPress = useCallback(() => {
     const oldGameState = [...game];
@@ -21,10 +21,11 @@ function GameRenderItem(props: props) {
       oldGameStateItem => oldGameStateItem.x === x && oldGameStateItem.y === y
     );
 
-    oldGameState[index].value = 'X';
+    oldGameState[index].value = player === 1 ? 'X' : 'O';
 
     setGame(oldGameState);
-  }, [x, y, setGame, game]);
+    setPlayer(player === 1 ? 2 : 1);
+  }, [x, y, setGame, game, player, setPlayer]);
 
   return (
     <Pressable style={styles.container} onPress={onPress}>
