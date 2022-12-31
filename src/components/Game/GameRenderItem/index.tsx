@@ -16,6 +16,10 @@ function GameRenderItem(props: props) {
   const { setGame, game, setPlayer, player } = useGame();
 
   const onPress = useCallback(() => {
+    if (value) {
+      return;
+    }
+
     const oldGameState = [...game];
     const index = oldGameState.findIndex(
       oldGameStateItem => oldGameStateItem.x === x && oldGameStateItem.y === y
@@ -25,7 +29,7 @@ function GameRenderItem(props: props) {
 
     setGame(oldGameState);
     setPlayer(player === 1 ? 2 : 1);
-  }, [x, y, setGame, game, player, setPlayer]);
+  }, [x, y, setGame, game, player, setPlayer, value]);
 
   return (
     <Pressable style={styles.container} onPress={onPress}>
