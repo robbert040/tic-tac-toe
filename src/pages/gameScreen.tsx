@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-function home() {
+function GameScreen() {
   return (
     <View>
-      <Text>home</Text>
+      <Text>game</Text>
     </View>
   );
 }
 
-export default home;
+export default GameScreen;
