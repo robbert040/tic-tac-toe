@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
-import { GameStateProps, initialGameState } from '../../utils/game';
+import { GameStateProps } from '../../utils/game';
 import GameRenderItem from './GameRenderItem';
+import withPosition from './withContext';
 import styles from './styles';
+import useGame from './useGame';
 
 const renderItem = ({ item }: { item: GameStateProps }) => {
   return <GameRenderItem item={item} />;
@@ -13,11 +15,11 @@ const keyExtractor = (item: GameStateProps) => {
 };
 
 function Game() {
-  const [gameValues, setGameValues] = useState(initialGameState);
+  const { game } = useGame();
 
   return (
     <FlatList
-      data={gameValues}
+      data={game}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       contentContainerStyle={styles.container}
@@ -26,4 +28,4 @@ function Game() {
   );
 }
 
-export default Game;
+export default withPosition(Game);
