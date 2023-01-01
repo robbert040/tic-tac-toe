@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FancyAlert } from 'react-native-expo-fancy-alerts';
 import { checkIfTheGameIsFinished, checkIfThereIsAWinner, GameStateProps } from '../../utils/game';
 import GameRenderItem from './GameRenderItem';
 import withPosition from './withContext';
@@ -16,26 +17,64 @@ const keyExtractor = (item: GameStateProps) => {
 
 function Game() {
   const { game, setGame } = useGame();
+  const [showWinnerAlert, setShowWinnerAlert] = useState(false);
+  const [showEndGameAlert, setShowEndGameAlert] = useState(false);
 
   useEffect(() => {
     const winner = checkIfThereIsAWinner(game);
     if (winner) {
-      console.log(winner, ' won');
+      setShowWinnerAlert(true);
     }
     if (checkIfTheGameIsFinished(game)) {
-      console.log('game over');
+      setShowEndGameAlert(true);
     }
   }, [game, setGame]);
 
   return (
-    <FlatList
-      data={game}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-      contentContainerStyle={styles.container}
-      numColumns={3}
-      extraData={game}
-    />
+    <>
+      <FancyAlert
+        visible={showWinnerAlert}
+        icon={
+          <View style={styles.alertIcon}>
+            <Text>🏆</Text>
+          </View>
+        }
+        style={styles.alert}
+        onRequestClose={() => setShowWinnerAlert(false)}>
+        <Text style={styles.alertText}>Winner {checkIfThereIsAWinner(game)}</Text>
+        <TouchableOpacity style={styles.alertButton} onPress={() => {}}>
+          <Text style={styles.alertButtonText}>New Game</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.alertButtonExit} onPress={() => {}}>
+          <Text style={styles.alertButtonText}>Exit</Text>
+        </TouchableOpacity>
+      </FancyAlert>
+      <FancyAlert
+        visible={showEndGameAlert}
+        icon={
+          <View style={styles.alertIcon}>
+            <Text>❌</Text>
+          </View>
+        }
+        style={styles.alert}
+        onRequestClose={() => setShowEndGameAlert(false)}>
+        <Text style={styles.alertText}>No winner</Text>
+        <TouchableOpacity style={styles.alertButton} onPress={() => {}}>
+          <Text style={styles.alertButtonText}>New Game</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.alertButtonExit} onPress={() => {}}>
+          <Text style={styles.alertButtonText}>Exit</Text>
+        </TouchableOpacity>
+      </FancyAlert>
+      <FlatList
+        data={game}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        contentContainerStyle={styles.container}
+        numColumns={3}
+        extraData={game}
+      />
+    </>
   );
 }
 
