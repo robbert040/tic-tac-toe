@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
+import { initialGameState } from '../../utils/game';
+import useGame from '../Game/useGame';
 import styles from './styles';
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
 
 function Alert(props: Props) {
   const { visible, setVisible, icon, text } = props;
+  const { setGame } = useGame();
 
   return (
     <FancyAlert
@@ -24,10 +27,65 @@ function Alert(props: Props) {
       style={styles.alert}
       onRequestClose={() => setVisible(false)}>
       <Text style={styles.alertText}>{text}</Text>
-      <TouchableOpacity style={styles.alertButton} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.alertButton}
+        onPress={() => {
+          setGame([
+            {
+              y: 0,
+              x: 0,
+              value: undefined,
+            },
+            {
+              y: 0,
+              x: 1,
+              value: undefined,
+            },
+            {
+              y: 0,
+              x: 2,
+              value: undefined,
+            },
+            {
+              y: 1,
+              x: 0,
+              value: undefined,
+            },
+            {
+              y: 1,
+              x: 1,
+              value: undefined,
+            },
+            {
+              y: 1,
+              x: 2,
+              value: undefined,
+            },
+            {
+              y: 2,
+              x: 0,
+              value: undefined,
+            },
+            {
+              y: 2,
+              x: 1,
+              value: undefined,
+            },
+            {
+              y: 2,
+              x: 2,
+              value: undefined,
+            },
+          ]);
+          setVisible(false);
+        }}>
         <Text style={styles.alertButtonText}>New Game</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.alertButtonExit} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.alertButtonExit}
+        onPress={() => {
+          setVisible(false);
+        }}>
         <Text style={styles.alertButtonText}>Exit</Text>
       </TouchableOpacity>
     </FancyAlert>
