@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FlatList } from 'react-native';
-import { checkIfTheGameIsFinished, GameStateProps, initialGameState } from '../../utils/game';
+import { checkIfTheGameIsFinished, GameStateProps } from '../../utils/game';
 import GameRenderItem from './GameRenderItem';
 import withPosition from './withContext';
 import styles from './styles';
@@ -19,7 +19,7 @@ function Game() {
 
   useEffect(() => {
     if (checkIfTheGameIsFinished(game)) {
-      setGame(initialGameState);
+      console.log('game over');
     }
   }, [game, setGame]);
 
@@ -30,6 +30,7 @@ function Game() {
       keyExtractor={keyExtractor}
       contentContainerStyle={styles.container}
       numColumns={3}
+      extraData={game}
     />
   );
 }

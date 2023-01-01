@@ -16,7 +16,7 @@ interface Context {
 }
 
 export const GameContext = createContext<Context>({
-  game: initialGameState,
+  game: [...initialGameState],
   setGame: () => {},
   player: 1,
   setPlayer: () => {},
@@ -24,7 +24,7 @@ export const GameContext = createContext<Context>({
 
 export const GameContextProvider = (props: { children: ReactNode }) => {
   const { children } = props;
-  const [game, setGame] = useState<Array<GameStateProps>>(initialGameState);
+  const [game, setGame] = useState<Array<GameStateProps>>([...initialGameState]);
   const [player, setPlayer] = useState<number>(1);
 
   return useMemo(

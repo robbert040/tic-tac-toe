@@ -63,5 +63,5 @@ export const checkIfTheGameIsFinished = (game: Array<GameStateProps>) => {
     }
   });
 
-  return !!emptyValues;
+  return !emptyValues;
 };
