@@ -5548,7 +5548,7 @@ prompts@^2.3.2, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   dependencies:
@@ -5645,6 +5645,12 @@ react-native-codegen@^0.70.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
+
+react-native-expo-fancy-alerts@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-expo-fancy-alerts/-/react-native-expo-fancy-alerts-2.1.1.tgz#2cf514d12ee8b0680e3ea4581113d486a1803876"
+  dependencies:
+    prop-types "^15.7.2"
 
 react-native-gradle-plugin@^0.70.3:
   version "0.70.3"
