@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FlatList } from 'react-native';
-import { checkIfTheGameIsFinished, GameStateProps } from '../../utils/game';
+import { checkIfTheGameIsFinished, checkIfThereIsAWinner, GameStateProps } from '../../utils/game';
 import GameRenderItem from './GameRenderItem';
 import withPosition from './withContext';
 import styles from './styles';
@@ -18,6 +18,10 @@ function Game() {
   const { game, setGame } = useGame();
 
   useEffect(() => {
+    const winner = checkIfThereIsAWinner(game);
+    if (winner) {
+      console.log(winner, ' won');
+    }
     if (checkIfTheGameIsFinished(game)) {
       console.log('game over');
     }
