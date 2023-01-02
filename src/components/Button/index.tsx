@@ -24,7 +24,7 @@ function Button(props: Props) {
         )
       }
       style={({ pressed }) => (pressed ? styles.containerPressed : styles.container)}>
-      <Text>{text}</Text>
+      <Text style={styles.text}>{text}</Text>
     </Pressable>
   );
 }
