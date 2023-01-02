@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Button from '../components/Button/index';
 
 function HomeScreen() {
   return (
     <View>
-      <Text>home</Text>
+      <Button text="Single Player" gameMode="1Player" />
+      <Button text="Two Player" gameMode="2Player" />
     </View>
   );
 }
