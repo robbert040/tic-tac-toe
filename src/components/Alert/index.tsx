@@ -1,7 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
-import { initialGameState } from '../../utils/game';
 import useGame from '../Game/useGame';
 import styles from './styles';
 
@@ -15,6 +15,7 @@ interface Props {
 function Alert(props: Props) {
   const { visible, setVisible, icon, text } = props;
   const { setGame } = useGame();
+  const navigation = useNavigation();
 
   return (
     <FancyAlert
@@ -85,6 +86,54 @@ function Alert(props: Props) {
         style={styles.alertButtonExit}
         onPress={() => {
           setVisible(false);
+          setGame([
+            {
+              y: 0,
+              x: 0,
+              value: undefined,
+            },
+            {
+              y: 0,
+              x: 1,
+              value: undefined,
+            },
+            {
+              y: 0,
+              x: 2,
+              value: undefined,
+            },
+            {
+              y: 1,
+              x: 0,
+              value: undefined,
+            },
+            {
+              y: 1,
+              x: 1,
+              value: undefined,
+            },
+            {
+              y: 1,
+              x: 2,
+              value: undefined,
+            },
+            {
+              y: 2,
+              x: 0,
+              value: undefined,
+            },
+            {
+              y: 2,
+              x: 1,
+              value: undefined,
+            },
+            {
+              y: 2,
+              x: 2,
+              value: undefined,
+            },
+          ]);
+          navigation.goBack();
         }}>
         <Text style={styles.alertButtonText}>Exit</Text>
       </TouchableOpacity>
