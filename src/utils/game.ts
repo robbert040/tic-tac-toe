@@ -101,3 +101,10 @@ export const checkIfTheGameIsFinished = (game: Array<GameStateProps>) => {
 
   return !emptyValues;
 };
+
+export const nextMoveComputer = (game: Array<GameStateProps>) => {
+  const possibleMoves = [...game.filter(gameRow => !gameRow.value)];
+  const amountOfPossibleMoves = possibleMoves.length - 1;
+
+  return possibleMoves[Math.round(Math.random() * amountOfPossibleMoves)];
+};

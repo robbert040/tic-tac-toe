@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text } from 'react-native';
-import { checkIfTheGameIsFinished, checkIfThereIsAWinner, GameStateProps } from '../../utils/game';
+import { useNavigation } from '@react-navigation/native';
+import {
+  checkIfTheGameIsFinished,
+  checkIfThereIsAWinner,
+  GameStateProps,
+  nextMoveComputer,
+} from '../../utils/game';
 import GameRenderItem from './GameRenderItem';
 import withPosition from './withContext';
 import styles from './styles';
@@ -16,9 +22,30 @@ const keyExtractor = (item: GameStateProps) => {
 };
 
 function Game() {
-  const { game, setGame, player } = useGame();
+  const { game, setGame, player, setPlayer } = useGame();
   const [showWinnerAlert, setShowWinnerAlert] = useState(false);
   const [showEndGameAlert, setShowEndGameAlert] = useState(false);
+
+  const navigation = useNavigation();
+  const { gameMode } = navigation.getState().routes[navigation.getState().index].params;
+
+  useEffect(() => {
+    if (gameMode === '1Player' && player === 2) {
+      const nextMove = nextMoveComputer(game);
+
+      if (nextMove) {
+        const oldGameState = [...game];
+        const index = oldGameState.findIndex(
+          oldGameStateItem => oldGameStateItem.x === nextMove.x && oldGameStateItem.y === nextMove.y
+        );
+
+        oldGameState[index].value = 'O';
+
+        setGame(oldGameState);
+        setPlayer(1);
+      }
+    }
+  }, [player, game, gameMode, setGame, setPlayer]);
 
   useEffect(() => {
     const winner = checkIfThereIsAWinner(game);
