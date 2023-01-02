@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import { checkIfTheGameIsFinished, checkIfThereIsAWinner, GameStateProps } from '../../utils/game';
 import GameRenderItem from './GameRenderItem';
 import withPosition from './withContext';
@@ -16,7 +16,7 @@ const keyExtractor = (item: GameStateProps) => {
 };
 
 function Game() {
-  const { game, setGame } = useGame();
+  const { game, setGame, player } = useGame();
   const [showWinnerAlert, setShowWinnerAlert] = useState(false);
   const [showEndGameAlert, setShowEndGameAlert] = useState(false);
 
@@ -44,6 +44,7 @@ function Game() {
         icon="❌"
         text="No winner"
       />
+      <Text style={styles.text}>Player {player} is on</Text>
       <FlatList
         data={game}
         renderItem={renderItem}
