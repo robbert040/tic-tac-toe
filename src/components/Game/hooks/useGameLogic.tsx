@@ -10,7 +10,7 @@ function useGameLogic() {
 
   useEffect(() => {
     if (gameMode === '1Player' && player === 2) {
-      const nextMove = nextMoveComputer(game);
+      const nextMove = nextMoveComputer([...game]);
 
       if (nextMove) {
         const oldGameState = [...game];

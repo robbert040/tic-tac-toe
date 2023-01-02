@@ -102,9 +102,45 @@ export const checkIfTheGameIsFinished = (game: Array<GameStateProps>) => {
   return !emptyValues;
 };
 
+function checkForWinningMove(
+  player: string,
+  game: Array<GameStateProps>,
+  possibleMoves: Array<GameStateProps>
+) {
+  let possibleMove = null;
+  [...game].forEach(gameRow => {
+    possibleMoves.forEach(gameRowPossible => {
+      if (gameRowPossible.x === gameRow.x && gameRowPossible.y === gameRow.y) {
+        gameRow.value = player;
+
+        const isThereAWinner = checkIfThereIsAWinner([...game]);
+        gameRow.value = undefined;
+
+        if (!!isThereAWinner) {
+          possibleMove = gameRowPossible;
+        }
+      }
+    });
+  });
+
+  return possibleMove;
+}
+
 export const nextMoveComputer = (game: Array<GameStateProps>) => {
   const possibleMoves = [...game.filter(gameRow => !gameRow.value)];
   const amountOfPossibleMoves = possibleMoves.length - 1;
+
+  // is there a move that beats the game
+  const winningMove = checkForWinningMove('O', [...game], [...possibleMoves]);
+  if (winningMove) {
+    return winningMove;
+  }
+
+  // can the oponent do a move that can win the game
+  const blockMove = checkForWinningMove('X', [...game], [...possibleMoves]);
+  if (blockMove) {
+    return blockMove;
+  }
 
   return possibleMoves[Math.round(Math.random() * amountOfPossibleMoves)];
 };
