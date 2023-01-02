@@ -13,13 +13,14 @@ const createStyles = ({ x, y }: Props) =>
       height: (width - 60) * 0.333,
       width: (width - 60) * 0.333,
       justifyContent: 'center',
-      borderLeftWidth: x > 0 ? 4 : 0,
-      borderTopWidth: y > 0 ? 4 : 0,
+      borderLeftWidth: x > 0 ? 15 : 0,
+      borderTopWidth: y > 0 ? 15 : 0,
       borderColor: 'black',
       border: 'solid',
     },
     text: {
       textAlign: 'center',
+      fontWeight: 'bold',
       fontSize: 72,
     },
   });

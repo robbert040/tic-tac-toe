@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     marginTop: '10%',
   },
   text: {
-    fontSize: 32,
+    fontSize: 36,
     textAlign: 'center',
     marginTop: 48,
     fontWeight: 'bold',
