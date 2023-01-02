@@ -86,53 +86,6 @@ function Alert(props: Props) {
         style={styles.alertButtonExit}
         onPress={() => {
           setVisible(false);
-          setGame([
-            {
-              y: 0,
-              x: 0,
-              value: undefined,
-            },
-            {
-              y: 0,
-              x: 1,
-              value: undefined,
-            },
-            {
-              y: 0,
-              x: 2,
-              value: undefined,
-            },
-            {
-              y: 1,
-              x: 0,
-              value: undefined,
-            },
-            {
-              y: 1,
-              x: 1,
-              value: undefined,
-            },
-            {
-              y: 1,
-              x: 2,
-              value: undefined,
-            },
-            {
-              y: 2,
-              x: 0,
-              value: undefined,
-            },
-            {
-              y: 2,
-              x: 1,
-              value: undefined,
-            },
-            {
-              y: 2,
-              x: 2,
-              value: undefined,
-            },
-          ]);
           navigation.goBack();
         }}>
         <Text style={styles.alertButtonText}>Exit</Text>
